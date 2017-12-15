@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Login</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+</head>
+<body>
+<h1>Admin Login</h1>
+<div>
+    <label for="username">Username:</label>
+    <input type="text" id="username"/>
+    <br/>
+</div>
+<div>
+    <label for="password">Password:</label>
+    <input type="password" id="password"/>
+    <br/>
+</div>
+<button id="loginBtn">Log In</button>
+<!--<a href="NewUser.html"><button>New User</button></a>-->
+
+<br/>
+<div id="display"> </div>
+<script type="text/javascript">
+
+    var username;
+    var password;
+
+    var submitBtn = document.getElementById('loginBtn');
+    submitBtn.addEventListener('click', function (){
+        checkDB4();
+    }, false);
+
+
+
+    function checkDB4() {
+        username = document.getElementById('username').value;
+        password = document.getElementById('password').value;
+        $.ajax({
+            type: 'post',
+            url: 'AdminLogin.php',
+            data: {
+                username: username,
+                password: password
+            },
+            success: function( data ) {
+                document.getElementById("display").childNodes[0].textContent = data;
+                if(data == "Success!"){
+                    window.location = "AdminMain.php";
+                }
+            }
+        });
+    }
+
+
+
+</script>
+</body>
+</html>

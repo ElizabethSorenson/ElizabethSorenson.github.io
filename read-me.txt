@@ -1,0 +1,7 @@
+Owner/Admin can log in and create New Users(employees) with a username and a password.
+Users(employees) are able to clock in/clock out.
+Users passwords are hashed when entered.
+Users(employees) are able to enter sandwiches they made and keep track of time it took to make them.
+Tracks employees that are currently clocked in.
+Keeps track of employees with the lowest making time for sandwiches and are considered 'top' makers.
+Keeps track of how long employees are on the clock for.

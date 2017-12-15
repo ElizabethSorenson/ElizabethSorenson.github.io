@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New User</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<h1>New User</h1>
+<div>
+    <label for="username">Username:</label>
+    <input type="text" id="username"/>
+    <br/>
+</div>
+<div>
+    <label for="password">Password:</label>
+    <input type="password" id="password"/>
+    <br/>
+</div>
+<button id="submitBtn">Create User</button>
+<br><br><br>
+<br/><a href="Login.html"> <button id="loginReturn">Clock In Page</button></a>
+
+<div id = "display"> <br/></div>
+
+<script type="text/javascript">
+
+    var username;
+    var password;
+
+    var submitBtn = document.getElementById('submitBtn');
+    submitBtn.addEventListener('click', function (){
+        postToDB();
+    }, false);
+
+
+    function postToDB() {
+        username = document.getElementById('username').value;
+        password = document.getElementById('password').value;
+        $.ajax({
+            type: 'post',
+            url: 'NewUser.php',
+            data: {
+                username: username,
+                password: password
+            },
+            success: function( data ) {
+                document.getElementById("display").childNodes[0].textContent = data;
+            }
+        });
+    }
+
+</script>
+</body>
+</html>

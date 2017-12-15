@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sandwich Creator</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+<form method="POST" action="SandwichCreator.php">
+
+    <p>
+        <div>
+        <label for="username">Username:</label>
+        <input type="text" id="username"  name = "username"/><br> User must be logged in, case-sensitive
+        <br/><br><br><br>
+    </div>
+
+
+        Select Sandwich Type :<br>
+        <select name="sandwichType" size="5" >
+            <option value="Ham">Ham</option>
+            <option value="Turkey">Turkey</option>
+            <option value="RoastBeef">Roast Beef</option>
+            <option value="Steak">Steak</option>
+            <option value="SpicyItalian">Spicy Italian</option>
+        </select>
+    <br><br><br>
+        Select Cheese:
+        <br>
+        <input type="checkbox" name="cheese1" value="provolone"> Provolone<br>
+        <input type="checkbox" name="cheese2" value="Swiss"> Swiss<br>
+        <input type="checkbox" name="cheese3" value="American"> American<br><br><br><br>
+
+    <div>
+        <label for="timeInput">Input time(seconds):</label>
+        <input type="text" id="timeInput" name="timeInput"/><br><br><br>
+    </div>
+    </p>
+    <button id="submitButton">Submit</button>
+
+
+    <script type="text/javascript">
+
+        var username;
+        var timeInput;
+        var sandwichType;
+        var cheese1;
+        var cheese2;
+        var cheese3;
+
+        var submitButton = document.getElementById('submitButton');
+        submitButton.addEventListener('click', function (){
+            postToDB3();
+        }, false);
+
+
+        function postToDB3() {
+            username = document.getElementById('username').value;
+            timeInput = document.getElementById('timeInput').value;
+            sandwichType = document.getElementById('sandwichType').value;
+            cheese1 = document.getElementById('cheese1').value;
+            cheese2 = document.getElementById('cheese2').value;
+            cheese3 = document.getElementById('cheese3').value;
+            $.ajax({
+                type: 'post',
+                url: 'sandwichCreator.php',
+                data: {
+                    username: username,
+                    timeInput: timeInput,
+                    sandwichType: sandwichType,
+                    cheese1: cheese1,
+                    cheese2: cheese2,
+                    cheese3: cheese3
+
+                },
+                success: function( data ) {
+                    document.getElementById("display").childNodes[0].textContent = data;
+                }
+            });
+        }
+
+    </script>
+
+</form>
+
+</body>
+</html>
+
